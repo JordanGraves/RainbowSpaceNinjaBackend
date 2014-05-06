@@ -13,7 +13,7 @@ bottle = Bottle()
 @bottle.route('/')
 def hello():
     """Return a friendly HTTP greeting."""
-    return 'Hello World!'
+    return 'Running v0.0.0'
 
 
 @bottle.post('/score')

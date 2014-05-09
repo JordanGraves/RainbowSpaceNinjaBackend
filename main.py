@@ -8,12 +8,11 @@ logging.getLogger().setLevel(logging.DEBUG)
 import json
 
 bottle = Bottle()
-
+version = "v0.0.0"
 
 @bottle.route('/')
-def hello():
-    """Return a friendly HTTP greeting."""
-    return 'Running v0.0.0'
+def version():
+    return version
 
 
 @bottle.post('/score')

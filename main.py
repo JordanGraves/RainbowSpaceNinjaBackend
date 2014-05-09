@@ -11,8 +11,8 @@ bottle = Bottle()
 version = "v0.0.0"
 
 @bottle.route('/')
-def version():
-    return version
+def hello():
+    return "Running " + version
 
 
 @bottle.post('/score')

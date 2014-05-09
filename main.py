@@ -28,6 +28,7 @@ def post_score():
     except Exception as e:
         logging.exception(e)
 
+
 @bottle.get('/scores')
 def get_scores():
     try:
@@ -35,6 +36,7 @@ def get_scores():
         return json.dumps([dict(name=result.name, score=result.score) for result in query.run(limit=10)])
     except Exception as e:
         logging.exception(e)
+
 
 # Define an handler for 404 errors.
 @bottle.error(404)

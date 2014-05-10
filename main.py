@@ -44,7 +44,7 @@ def post_score():
 def get_scores():
     try:
         query = Score.all().order("-score")
-        return json.dumps([dict(name=result.name, score=result.score) for result in query.run(limit=10)])
+        return json.dumps(dict(scores=[dict(name=result.name, score=result.score) for result in query.run(limit=10)]))
     except Exception as e:
         logging.exception(e)
 

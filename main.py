@@ -1,5 +1,5 @@
 import logging
-from bottle import Bottle, request
+from bottle import Bottle, request, response
 from Models import Score
 logging.getLogger().setLevel(logging.DEBUG)
 import json

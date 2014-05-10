@@ -6,7 +6,7 @@ import json
 
 
 bottle = Bottle()
-version = "v0.0.1"
+version = "v0.0.2"
 
 
 @bottle.route('/')

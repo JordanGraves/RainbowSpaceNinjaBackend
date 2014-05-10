@@ -1,18 +1,30 @@
 import logging
-
 from bottle import Bottle, request
-
 from Models import Score
-
 logging.getLogger().setLevel(logging.DEBUG)
 import json
 
+
 bottle = Bottle()
-version = "v0.0.0"
+version = "v0.0.1"
+
 
 @bottle.route('/')
 def hello():
     return "Running " + version
+
+
+@bottle.route('/crossdomain.xml')
+def croossdomain():
+    crossdomain =  '<?xml version="1.0"?>'
+    crossdomain =  crossdomain + '<!DOCTYPE cross-domain-policy SYSTEM "/xml/dtds/cross-domain-policy.dtd">'
+    crossdomain =  crossdomain + '<cross-domain-policy>'
+    crossdomain =  crossdomain + '<site-control permitted-cross-domain-policies="all"/>'
+    crossdomain =  crossdomain + '<allow-access-from domain="*" to-ports="*" secure="false"/>'
+    crossdomain =  crossdomain + '<allow-http-request-headers-from domain="*" headers="*" secure="false"/>' 
+    crossdomain =  crossdomain + '</cross-domain-policy>'
+    response.headers [ 'Content-Type' ] = 'text/xml'
+    response.out.write ( crossdomain )
 
 
 @bottle.post('/score')

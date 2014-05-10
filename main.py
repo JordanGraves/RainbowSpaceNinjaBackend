@@ -6,7 +6,7 @@ import json
 
 
 bottle = Bottle()
-version = "v0.0.2"
+version = "v0.0.3"
 
 
 @bottle.route('/')
@@ -15,7 +15,7 @@ def hello():
 
 
 @bottle.route('/crossdomain.xml')
-def croossdomain():
+def crossdomain_xml():
     crossdomain =  '<?xml version="1.0"?>'
     crossdomain =  crossdomain + '<!DOCTYPE cross-domain-policy SYSTEM "/xml/dtds/cross-domain-policy.dtd">'
     crossdomain =  crossdomain + '<cross-domain-policy>'
@@ -24,7 +24,7 @@ def croossdomain():
     crossdomain =  crossdomain + '<allow-http-request-headers-from domain="*" headers="*" secure="false"/>' 
     crossdomain =  crossdomain + '</cross-domain-policy>'
     response.headers [ 'Content-Type' ] = 'text/xml'
-    response.out.write ( crossdomain )
+    return crossdomain
 
 
 @bottle.post('/score')

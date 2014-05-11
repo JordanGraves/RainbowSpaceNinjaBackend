@@ -6,7 +6,7 @@ import json
 
 
 bottle = Bottle()
-version = "v0.0.3"
+version = "v0.0.4"
 
 
 @bottle.route('/')
@@ -29,6 +29,9 @@ def crossdomain_xml():
 
 @bottle.post('/score')
 def post_score():
+    """
+        Adds a score and returns the new score
+    """
     try:
         name = request.json['name']
         score = request.json['score']
@@ -36,6 +39,22 @@ def post_score():
         key = score.put()
         score = Score.get(key)
         return json.dumps(dict(score=score.score, name=score.name))
+    except Exception as e:
+        logging.exception(e)
+
+
+@bottle.post('/scores')
+def post_to_scores():
+    """
+        Adds a score and returns the top ten        
+    """
+    try:
+        name = request.json['name']
+        score = request.json['score']
+        score = Score(name=name, score=score)
+        key = score.put()
+        query = Score.all().order("-score")
+        return json.dumps(dict(scores=[dict(name=result.name, score=result.score) for result in query.run(limit=10)]))
     except Exception as e:
         logging.exception(e)
 

@@ -51,8 +51,10 @@ def post_to_scores():
     try:
         name = request.json['name']
         score = request.json['score']
-        score = Score(name=name, score=score)
-        key = score.put()
+        if isinstance(score, int):
+            score = float(score)    
+        score_ = Score(name=name, score=score)
+        key = score_.put()
         query = Score.all().order("-score")
         return json.dumps(dict(scores=[dict(name=result.name, score=result.score) for result in query.run(limit=10)]))
     except Exception as e:
